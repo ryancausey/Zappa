@@ -2093,6 +2093,7 @@ class ZappaCLI(object):
         self.context_header_mappings = self.stage_config.get('context_header_mappings', {})
         self.xray_tracing = self.stage_config.get('xray_tracing', False)
         self.desired_role_arn = self.stage_config.get('role_arn')
+        self.boto_client_config = self.stage_config.get('boto_client_config', {})
 
         # Load ALB-related settings
         self.use_alb = self.stage_config.get('alb_enabled', False)
@@ -2111,7 +2112,8 @@ class ZappaCLI(object):
                             runtime=self.runtime,
                             tags=self.tags,
                             endpoint_urls=self.stage_config.get('aws_endpoint_urls',{}),
-                            xray_tracing=self.xray_tracing
+                            xray_tracing=self.xray_tracing,
+                            boto_client_config=self.boto_client_config,
                         )
 
         for setting in CUSTOM_SETTINGS:
